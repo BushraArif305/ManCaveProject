@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a49d20524eac4ddeaf125d04af667bee" Name="Diagram1">
+        <EntityTypeShape EntityType="ManCaveLeagueModel.Game" Width="1.5" PointX="5.25" PointY="6.625" />
+        <EntityTypeShape EntityType="ManCaveLeagueModel.League" Width="1.5" PointX="5.25" PointY="9.625" />
+        <EntityTypeShape EntityType="ManCaveLeagueModel.LeagueJudge" Width="1.5" PointX="12.75" PointY="7.25" />
+        <EntityTypeShape EntityType="ManCaveLeagueModel.LeagueMaster" Width="1.5" PointX="7.5" PointY="5" />
+        <EntityTypeShape EntityType="ManCaveLeagueModel.Player" Width="1.5" PointX="10.75" PointY="16.5" />
+        <EntityTypeShape EntityType="ManCaveLeagueModel.PlayerGame" Width="1.5" PointX="10.5" PointY="6.75" />
+        <EntityTypeShape EntityType="ManCaveLeagueModel.PlayerMaster" Width="1.5" PointX="13" PointY="10.875" />
+        <EntityTypeShape EntityType="ManCaveLeagueModel.Rank" Width="1.5" PointX="7.5" PointY="9.875" />
+        <EntityTypeShape EntityType="ManCaveLeagueModel.Result" Width="1.5" PointX="8.25" PointY="2.625" />
+        <EntityTypeShape EntityType="ManCaveLeagueModel.Tier" Width="1.5" PointX="9.75" PointY="12.625" />
+        <EntityTypeShape EntityType="ManCaveLeagueModel.TierType" Width="1.5" PointX="7.5" PointY="13.25" />
+        <EntityTypeShape EntityType="ManCaveLeagueModel.User" Width="1.5" PointX="3" PointY="7.875" />
+        <EntityTypeShape EntityType="ManCaveLeagueModel.UserType" Width="1.5" PointX="0.75" PointY="8.75" />
+        <EntityTypeShape EntityType="ManCaveLeagueModel.View_AllGames" Width="1.5" PointX="0.75" PointY="12.75" />
+        <EntityTypeShape EntityType="ManCaveLeagueModel.View_AllJudges" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="ManCaveLeagueModel.View_AllLegueRules" Width="1.5" PointX="4.75" PointY="0.75" />
+        <AssociationConnector Association="ManCaveLeagueModel.FK_Game_User" />
+        <AssociationConnector Association="ManCaveLeagueModel.FK_PlayerGame_Game" />
+        <AssociationConnector Association="ManCaveLeagueModel.FK_SeasonMaster_Game" />
+        <AssociationConnector Association="ManCaveLeagueModel.FK_GamingSeason_User" />
+        <AssociationConnector Association="ManCaveLeagueModel.FK_PlayerMaster_GamingSeason" />
+        <AssociationConnector Association="ManCaveLeagueModel.FK_Rank_League" />
+        <AssociationConnector Association="ManCaveLeagueModel.FK_SeasonMaster_GamingSeason" />
+        <AssociationConnector Association="ManCaveLeagueModel.FK_JudgesMaster_JudgesMaster" />
+        <AssociationConnector Association="ManCaveLeagueModel.FK_JudgesMaster_SeasonMaster" />
+        <AssociationConnector Association="ManCaveLeagueModel.FK_PlayerMaster_Player" />
+        <AssociationConnector Association="ManCaveLeagueModel.FK_PlayerGame_Result" />
+        <AssociationConnector Association="ManCaveLeagueModel.FK_PlayerGame_Tier" />
+        <AssociationConnector Association="ManCaveLeagueModel.FK_PlayerGame_User" />
+        <AssociationConnector Association="ManCaveLeagueModel.FK_Recording_PlayerMaster" />
+        <AssociationConnector Association="ManCaveLeagueModel.FK_PlayerMaster_Tier" />
+        <AssociationConnector Association="ManCaveLeagueModel.FK_Tier_Rank" />
+        <AssociationConnector Association="ManCaveLeagueModel.FK_Tier_TierType" />
+        <AssociationConnector Association="ManCaveLeagueModel.FK_User_UserType" />
+        <EntityTypeShape EntityType="ManCaveLeagueModel.View_AllGamesOfLeague" Width="1.5" PointX="10.375" PointY="0.75" />
+        <EntityTypeShape EntityType="ManCaveLeagueModel.View_PlayerInfo" Width="1.5" PointX="12.375" PointY="0.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

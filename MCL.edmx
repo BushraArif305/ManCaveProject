@@ -1,0 +1,1459 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="MCLModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityType Name="Game">
+          <Key>
+            <PropertyRef Name="GameId" />
+          </Key>
+          <Property Name="GameId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedByUserId" Type="int" />
+        </EntityType>
+        <EntityType Name="League">
+          <Key>
+            <PropertyRef Name="LeagueId" />
+          </Key>
+          <Property Name="LeagueId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" />
+          <Property Name="StartDate" Type="datetime" />
+          <Property Name="EndDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="Status" Type="bit" />
+        </EntityType>
+        <EntityType Name="LeagueJudge">
+          <Key>
+            <PropertyRef Name="LeagueJudgeId" />
+          </Key>
+          <Property Name="LeagueJudgeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="LeagueMasterId" Type="int" />
+        </EntityType>
+        <EntityType Name="LeagueMaster">
+          <Key>
+            <PropertyRef Name="LeagueMasterId" />
+          </Key>
+          <Property Name="LeagueMasterId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LeagueId" Type="int" />
+          <Property Name="GameId" Type="int" />
+          <Property Name="WinPoints" Type="int" />
+          <Property Name="LoosePoints" Type="int" />
+          <Property Name="TiePoints" Type="int" />
+          <Property Name="InvalidPoints" Type="int" />
+          <Property Name="MaximumGamePlayTime" Type="int" />
+        </EntityType>
+        <EntityType Name="Player">
+          <Key>
+            <PropertyRef Name="PlayerId" />
+          </Key>
+          <Property Name="PlayerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PlayerName" Type="nvarchar" MaxLength="250" />
+          <Property Name="PlayerUserId" Type="int" />
+          <Property Name="SmartLaunchDBId" Type="int" />
+        </EntityType>
+        <EntityType Name="PlayerGame">
+          <Key>
+            <PropertyRef Name="PlayerGameId" />
+          </Key>
+          <Property Name="PlayerGameId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PlayerMasterId" Type="int" />
+          <Property Name="RecordingFileName" Type="nvarchar" MaxLength="1000" />
+          <Property Name="GameStartTime" Type="datetime" />
+          <Property Name="GameEndTime" Type="datetime" />
+          <Property Name="GameId" Type="int" />
+          <Property Name="TierId" Type="int" />
+          <Property Name="ResultId" Type="int" />
+          <Property Name="GamePoints" Type="int" />
+          <Property Name="IsMarked" Type="bit" />
+          <Property Name="MarkedById" Type="int" />
+          <Property Name="MarkedAt" Type="datetime" />
+          <Property Name="ConsoleName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="PlayerMaster">
+          <Key>
+            <PropertyRef Name="PlayerMasterId" />
+          </Key>
+          <Property Name="PlayerMasterId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PlayerId" Type="int" />
+          <Property Name="LeagueId" Type="int" />
+          <Property Name="TierId" Type="int" />
+          <Property Name="Points" Type="int" />
+          <Property Name="TotalPoints" Type="int" />
+          <Property Name="PromoEnabled" Type="bit" Nullable="false" />
+          <Property Name="IsPromoBlock" Type="bit" />
+        </EntityType>
+        <EntityType Name="Rank">
+          <Key>
+            <PropertyRef Name="RankId" />
+          </Key>
+          <Property Name="RankId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" />
+          <Property Name="TierPoints" Type="int" />
+          <Property Name="LeagueId" Type="int" />
+          <Property Name="Index" Type="int" />
+        </EntityType>
+        <EntityType Name="Result">
+          <Key>
+            <PropertyRef Name="ResultId" />
+          </Key>
+          <Property Name="ResultId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Tier">
+          <Key>
+            <PropertyRef Name="TierId" />
+          </Key>
+          <Property Name="TierId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RankId" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" />
+          <Property Name="Index" Type="int" />
+          <Property Name="TierTypeId" Type="int" />
+        </EntityType>
+        <EntityType Name="TierType">
+          <Key>
+            <PropertyRef Name="TierTypeId" />
+          </Key>
+          <Property Name="TierTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TierType" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="UserTypeId" Type="int" />
+          <Property Name="LoginId" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" />
+          <Property Name="EmailId" Type="nvarchar" MaxLength="50" />
+          <Property Name="ContactNumber" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="UserType">
+          <Key>
+            <PropertyRef Name="UserTypeId" />
+          </Key>
+          <Property Name="UserTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserType" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ManCaveLeague.dbo.View_AllGames' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="View_AllGames">
+          <Key>
+            <PropertyRef Name="PlayerGameId" />
+            <PropertyRef Name="GameRankId" />
+            <PropertyRef Name="CurrentRankId" />
+            <PropertyRef Name="PromoEnabled" />
+          </Key>
+          <Property Name="PlayerGameId" Type="int" Nullable="false" />
+          <Property Name="PlayerMasterId" Type="int" />
+          <Property Name="RecordingFileName" Type="nvarchar" MaxLength="1000" />
+          <Property Name="GameStartTime" Type="datetime" />
+          <Property Name="GameEndTime" Type="datetime" />
+          <Property Name="GameId" Type="int" />
+          <Property Name="Game" Type="nvarchar" MaxLength="50" />
+          <Property Name="GameTierId" Type="int" />
+          <Property Name="GameTier" Type="nvarchar" MaxLength="50" />
+          <Property Name="GameTierTypeId" Type="int" />
+          <Property Name="GameRankId" Type="int" Nullable="false" />
+          <Property Name="GameTierType" Type="nvarchar" MaxLength="50" />
+          <Property Name="GameRank" Type="nvarchar" MaxLength="50" />
+          <Property Name="GameResultId" Type="int" />
+          <Property Name="GameResult" Type="nvarchar" MaxLength="50" />
+          <Property Name="GamePoints" Type="int" />
+          <Property Name="IsMarked" Type="bit" />
+          <Property Name="MarkedById" Type="int" />
+          <Property Name="MarkedByFName" Type="nvarchar" MaxLength="50" />
+          <Property Name="MarkedByLName" Type="nvarchar" MaxLength="50" />
+          <Property Name="ConsoleName" Type="nvarchar" MaxLength="50" />
+          <Property Name="MarkedAt" Type="datetime" />
+          <Property Name="PlayerId" Type="int" />
+          <Property Name="PlayerName" Type="nvarchar" MaxLength="250" />
+          <Property Name="LeagueId" Type="int" />
+          <Property Name="League" Type="nvarchar" MaxLength="50" />
+          <Property Name="CurrentTierId" Type="int" />
+          <Property Name="CurrentTier" Type="nvarchar" MaxLength="50" />
+          <Property Name="CurrentRankId" Type="int" Nullable="false" />
+          <Property Name="CurrentRank" Type="nvarchar" MaxLength="50" />
+          <Property Name="CurrentRankTierPoints" Type="int" />
+          <Property Name="CurrentTierTypeId" Type="int" />
+          <Property Name="CurrentTierType" Type="nvarchar" MaxLength="50" />
+          <Property Name="CurrentRankIndex" Type="int" />
+          <Property Name="Points" Type="int" />
+          <Property Name="TotalPoints" Type="int" />
+          <Property Name="PromoEnabled" Type="bit" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ManCaveLeague.dbo.View_AllJudges' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="View_AllJudges">
+          <Key>
+            <PropertyRef Name="LeagueJudgeId" />
+          </Key>
+          <Property Name="LeagueJudgeId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="UserTypeId" Type="int" />
+          <Property Name="LoginId" Type="nvarchar" MaxLength="50" />
+          <Property Name="LeagueId" Type="int" />
+          <Property Name="League" Type="nvarchar" MaxLength="50" />
+          <Property Name="GameId" Type="int" />
+          <Property Name="Game" Type="nvarchar" MaxLength="50" />
+          <Property Name="LeagueMasterId" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ManCaveLeague.dbo.View_AllLegueRules' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="View_AllLegueRules">
+          <Key>
+            <PropertyRef Name="LeagueId" />
+            <PropertyRef Name="LeagueMasterId" />
+          </Key>
+          <Property Name="LeagueId" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" />
+          <Property Name="StartDate" Type="datetime" />
+          <Property Name="EndDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="LeagueMasterId" Type="int" Nullable="false" />
+          <Property Name="GameId" Type="int" />
+          <Property Name="WinPoints" Type="int" />
+          <Property Name="LoosePoints" Type="int" />
+          <Property Name="TiePoints" Type="int" />
+          <Property Name="InvalidPoints" Type="int" />
+          <Property Name="MaximumGamePlayTime" Type="int" />
+          <Property Name="GameTitle" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedByUserId" Type="int" />
+        </EntityType>
+        <Association Name="FK_Game_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Game" Type="Self.Game" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Game">
+              <PropertyRef Name="CreatedByUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GamingSeason_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="League" Type="Self.League" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="League">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JudgesMaster_JudgesMaster">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="LeagueJudge" Type="Self.LeagueJudge" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="LeagueJudge">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JudgesMaster_SeasonMaster">
+          <End Role="LeagueMaster" Type="Self.LeagueMaster" Multiplicity="0..1" />
+          <End Role="LeagueJudge" Type="Self.LeagueJudge" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LeagueMaster">
+              <PropertyRef Name="LeagueMasterId" />
+            </Principal>
+            <Dependent Role="LeagueJudge">
+              <PropertyRef Name="LeagueMasterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlayerGame_Game">
+          <End Role="Game" Type="Self.Game" Multiplicity="0..1" />
+          <End Role="PlayerGame" Type="Self.PlayerGame" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Game">
+              <PropertyRef Name="GameId" />
+            </Principal>
+            <Dependent Role="PlayerGame">
+              <PropertyRef Name="GameId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlayerGame_Result">
+          <End Role="Result" Type="Self.Result" Multiplicity="0..1" />
+          <End Role="PlayerGame" Type="Self.PlayerGame" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Result">
+              <PropertyRef Name="ResultId" />
+            </Principal>
+            <Dependent Role="PlayerGame">
+              <PropertyRef Name="ResultId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlayerGame_Tier">
+          <End Role="Tier" Type="Self.Tier" Multiplicity="0..1" />
+          <End Role="PlayerGame" Type="Self.PlayerGame" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tier">
+              <PropertyRef Name="TierId" />
+            </Principal>
+            <Dependent Role="PlayerGame">
+              <PropertyRef Name="TierId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlayerGame_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="PlayerGame" Type="Self.PlayerGame" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="PlayerGame">
+              <PropertyRef Name="MarkedById" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlayerMaster_GamingSeason">
+          <End Role="League" Type="Self.League" Multiplicity="0..1" />
+          <End Role="PlayerMaster" Type="Self.PlayerMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="League">
+              <PropertyRef Name="LeagueId" />
+            </Principal>
+            <Dependent Role="PlayerMaster">
+              <PropertyRef Name="LeagueId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlayerMaster_Player">
+          <End Role="Player" Type="Self.Player" Multiplicity="0..1" />
+          <End Role="PlayerMaster" Type="Self.PlayerMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Player">
+              <PropertyRef Name="PlayerId" />
+            </Principal>
+            <Dependent Role="PlayerMaster">
+              <PropertyRef Name="PlayerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlayerMaster_Tier">
+          <End Role="Tier" Type="Self.Tier" Multiplicity="0..1" />
+          <End Role="PlayerMaster" Type="Self.PlayerMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tier">
+              <PropertyRef Name="TierId" />
+            </Principal>
+            <Dependent Role="PlayerMaster">
+              <PropertyRef Name="TierId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rank_League">
+          <End Role="League" Type="Self.League" Multiplicity="0..1" />
+          <End Role="Rank" Type="Self.Rank" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="League">
+              <PropertyRef Name="LeagueId" />
+            </Principal>
+            <Dependent Role="Rank">
+              <PropertyRef Name="LeagueId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Recording_PlayerMaster">
+          <End Role="PlayerMaster" Type="Self.PlayerMaster" Multiplicity="0..1" />
+          <End Role="PlayerGame" Type="Self.PlayerGame" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PlayerMaster">
+              <PropertyRef Name="PlayerMasterId" />
+            </Principal>
+            <Dependent Role="PlayerGame">
+              <PropertyRef Name="PlayerMasterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SeasonMaster_Game">
+          <End Role="Game" Type="Self.Game" Multiplicity="0..1" />
+          <End Role="LeagueMaster" Type="Self.LeagueMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Game">
+              <PropertyRef Name="GameId" />
+            </Principal>
+            <Dependent Role="LeagueMaster">
+              <PropertyRef Name="GameId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SeasonMaster_GamingSeason">
+          <End Role="League" Type="Self.League" Multiplicity="0..1" />
+          <End Role="LeagueMaster" Type="Self.LeagueMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="League">
+              <PropertyRef Name="LeagueId" />
+            </Principal>
+            <Dependent Role="LeagueMaster">
+              <PropertyRef Name="LeagueId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tier_Rank">
+          <End Role="Rank" Type="Self.Rank" Multiplicity="1" />
+          <End Role="Tier" Type="Self.Tier" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rank">
+              <PropertyRef Name="RankId" />
+            </Principal>
+            <Dependent Role="Tier">
+              <PropertyRef Name="RankId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tier_TierType">
+          <End Role="TierType" Type="Self.TierType" Multiplicity="0..1" />
+          <End Role="Tier" Type="Self.Tier" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TierType">
+              <PropertyRef Name="TierTypeId" />
+            </Principal>
+            <Dependent Role="Tier">
+              <PropertyRef Name="TierTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_UserType">
+          <End Role="UserType" Type="Self.UserType" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserType">
+              <PropertyRef Name="UserTypeId" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="UserTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MCLModelStoreContainer">
+          <EntitySet Name="Game" EntityType="Self.Game" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="League" EntityType="Self.League" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LeagueJudge" EntityType="Self.LeagueJudge" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LeagueMaster" EntityType="Self.LeagueMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Player" EntityType="Self.Player" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PlayerGame" EntityType="Self.PlayerGame" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PlayerMaster" EntityType="Self.PlayerMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rank" EntityType="Self.Rank" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Result" EntityType="Self.Result" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tier" EntityType="Self.Tier" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TierType" EntityType="Self.TierType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserType" EntityType="Self.UserType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="View_AllGames" EntityType="Self.View_AllGames" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[View_AllGames].[PlayerGameId] AS [PlayerGameId], 
+[View_AllGames].[PlayerMasterId] AS [PlayerMasterId], 
+[View_AllGames].[RecordingFileName] AS [RecordingFileName], 
+[View_AllGames].[GameStartTime] AS [GameStartTime], 
+[View_AllGames].[GameEndTime] AS [GameEndTime], 
+[View_AllGames].[GameId] AS [GameId], 
+[View_AllGames].[Game] AS [Game], 
+[View_AllGames].[GameTierId] AS [GameTierId], 
+[View_AllGames].[GameTier] AS [GameTier], 
+[View_AllGames].[GameTierTypeId] AS [GameTierTypeId], 
+[View_AllGames].[GameRankId] AS [GameRankId], 
+[View_AllGames].[GameTierType] AS [GameTierType], 
+[View_AllGames].[GameRank] AS [GameRank], 
+[View_AllGames].[GameResultId] AS [GameResultId], 
+[View_AllGames].[GameResult] AS [GameResult], 
+[View_AllGames].[GamePoints] AS [GamePoints], 
+[View_AllGames].[IsMarked] AS [IsMarked], 
+[View_AllGames].[MarkedById] AS [MarkedById], 
+[View_AllGames].[MarkedByFName] AS [MarkedByFName], 
+[View_AllGames].[MarkedByLName] AS [MarkedByLName], 
+[View_AllGames].[ConsoleName] AS [ConsoleName], 
+[View_AllGames].[MarkedAt] AS [MarkedAt], 
+[View_AllGames].[PlayerId] AS [PlayerId], 
+[View_AllGames].[PlayerName] AS [PlayerName], 
+[View_AllGames].[LeagueId] AS [LeagueId], 
+[View_AllGames].[League] AS [League], 
+[View_AllGames].[CurrentTierId] AS [CurrentTierId], 
+[View_AllGames].[CurrentTier] AS [CurrentTier], 
+[View_AllGames].[CurrentRankId] AS [CurrentRankId], 
+[View_AllGames].[CurrentRank] AS [CurrentRank], 
+[View_AllGames].[CurrentRankTierPoints] AS [CurrentRankTierPoints], 
+[View_AllGames].[CurrentTierTypeId] AS [CurrentTierTypeId], 
+[View_AllGames].[CurrentTierType] AS [CurrentTierType], 
+[View_AllGames].[CurrentRankIndex] AS [CurrentRankIndex], 
+[View_AllGames].[Points] AS [Points], 
+[View_AllGames].[TotalPoints] AS [TotalPoints], 
+[View_AllGames].[PromoEnabled] AS [PromoEnabled]
+FROM [dbo].[View_AllGames] AS [View_AllGames]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="View_AllJudges" EntityType="Self.View_AllJudges" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[View_AllJudges].[LeagueJudgeId] AS [LeagueJudgeId], 
+[View_AllJudges].[UserId] AS [UserId], 
+[View_AllJudges].[FirstName] AS [FirstName], 
+[View_AllJudges].[LastName] AS [LastName], 
+[View_AllJudges].[UserTypeId] AS [UserTypeId], 
+[View_AllJudges].[LoginId] AS [LoginId], 
+[View_AllJudges].[LeagueId] AS [LeagueId], 
+[View_AllJudges].[League] AS [League], 
+[View_AllJudges].[GameId] AS [GameId], 
+[View_AllJudges].[Game] AS [Game], 
+[View_AllJudges].[LeagueMasterId] AS [LeagueMasterId]
+FROM [dbo].[View_AllJudges] AS [View_AllJudges]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="View_AllLegueRules" EntityType="Self.View_AllLegueRules" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[View_AllLegueRules].[LeagueId] AS [LeagueId], 
+[View_AllLegueRules].[Title] AS [Title], 
+[View_AllLegueRules].[StartDate] AS [StartDate], 
+[View_AllLegueRules].[EndDate] AS [EndDate], 
+[View_AllLegueRules].[CreatedBy] AS [CreatedBy], 
+[View_AllLegueRules].[LeagueMasterId] AS [LeagueMasterId], 
+[View_AllLegueRules].[GameId] AS [GameId], 
+[View_AllLegueRules].[WinPoints] AS [WinPoints], 
+[View_AllLegueRules].[LoosePoints] AS [LoosePoints], 
+[View_AllLegueRules].[TiePoints] AS [TiePoints], 
+[View_AllLegueRules].[InvalidPoints] AS [InvalidPoints], 
+[View_AllLegueRules].[MaximumGamePlayTime] AS [MaximumGamePlayTime], 
+[View_AllLegueRules].[GameTitle] AS [GameTitle], 
+[View_AllLegueRules].[CreatedByUserId] AS [CreatedByUserId]
+FROM [dbo].[View_AllLegueRules] AS [View_AllLegueRules]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Game_User" Association="Self.FK_Game_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Game" EntitySet="Game" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GamingSeason_User" Association="Self.FK_GamingSeason_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="League" EntitySet="League" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JudgesMaster_JudgesMaster" Association="Self.FK_JudgesMaster_JudgesMaster">
+            <End Role="User" EntitySet="User" />
+            <End Role="LeagueJudge" EntitySet="LeagueJudge" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JudgesMaster_SeasonMaster" Association="Self.FK_JudgesMaster_SeasonMaster">
+            <End Role="LeagueMaster" EntitySet="LeagueMaster" />
+            <End Role="LeagueJudge" EntitySet="LeagueJudge" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlayerGame_Game" Association="Self.FK_PlayerGame_Game">
+            <End Role="Game" EntitySet="Game" />
+            <End Role="PlayerGame" EntitySet="PlayerGame" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlayerGame_Result" Association="Self.FK_PlayerGame_Result">
+            <End Role="Result" EntitySet="Result" />
+            <End Role="PlayerGame" EntitySet="PlayerGame" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlayerGame_Tier" Association="Self.FK_PlayerGame_Tier">
+            <End Role="Tier" EntitySet="Tier" />
+            <End Role="PlayerGame" EntitySet="PlayerGame" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlayerGame_User" Association="Self.FK_PlayerGame_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="PlayerGame" EntitySet="PlayerGame" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlayerMaster_GamingSeason" Association="Self.FK_PlayerMaster_GamingSeason">
+            <End Role="League" EntitySet="League" />
+            <End Role="PlayerMaster" EntitySet="PlayerMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlayerMaster_Player" Association="Self.FK_PlayerMaster_Player">
+            <End Role="Player" EntitySet="Player" />
+            <End Role="PlayerMaster" EntitySet="PlayerMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlayerMaster_Tier" Association="Self.FK_PlayerMaster_Tier">
+            <End Role="Tier" EntitySet="Tier" />
+            <End Role="PlayerMaster" EntitySet="PlayerMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rank_League" Association="Self.FK_Rank_League">
+            <End Role="League" EntitySet="League" />
+            <End Role="Rank" EntitySet="Rank" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recording_PlayerMaster" Association="Self.FK_Recording_PlayerMaster">
+            <End Role="PlayerMaster" EntitySet="PlayerMaster" />
+            <End Role="PlayerGame" EntitySet="PlayerGame" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SeasonMaster_Game" Association="Self.FK_SeasonMaster_Game">
+            <End Role="Game" EntitySet="Game" />
+            <End Role="LeagueMaster" EntitySet="LeagueMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SeasonMaster_GamingSeason" Association="Self.FK_SeasonMaster_GamingSeason">
+            <End Role="League" EntitySet="League" />
+            <End Role="LeagueMaster" EntitySet="LeagueMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tier_Rank" Association="Self.FK_Tier_Rank">
+            <End Role="Rank" EntitySet="Rank" />
+            <End Role="Tier" EntitySet="Tier" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tier_TierType" Association="Self.FK_Tier_TierType">
+            <End Role="TierType" EntitySet="TierType" />
+            <End Role="Tier" EntitySet="Tier" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_UserType" Association="Self.FK_User_UserType">
+            <End Role="UserType" EntitySet="UserType" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MCLModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="MCLEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Games" EntityType="MCLModel.Game" />
+          <EntitySet Name="Leagues" EntityType="MCLModel.League" />
+          <EntitySet Name="LeagueJudges" EntityType="MCLModel.LeagueJudge" />
+          <EntitySet Name="LeagueMasters" EntityType="MCLModel.LeagueMaster" />
+          <EntitySet Name="Players" EntityType="MCLModel.Player" />
+          <EntitySet Name="PlayerGames" EntityType="MCLModel.PlayerGame" />
+          <EntitySet Name="PlayerMasters" EntityType="MCLModel.PlayerMaster" />
+          <EntitySet Name="Ranks" EntityType="MCLModel.Rank" />
+          <EntitySet Name="Results" EntityType="MCLModel.Result" />
+          <EntitySet Name="Tiers" EntityType="MCLModel.Tier" />
+          <EntitySet Name="TierTypes" EntityType="MCLModel.TierType" />
+          <EntitySet Name="Users" EntityType="MCLModel.User" />
+          <EntitySet Name="UserTypes" EntityType="MCLModel.UserType" />
+          <EntitySet Name="View_AllGames" EntityType="MCLModel.View_AllGames" />
+          <EntitySet Name="View_AllJudges" EntityType="MCLModel.View_AllJudges" />
+          <EntitySet Name="View_AllLegueRules" EntityType="MCLModel.View_AllLegueRules" />
+          <AssociationSet Name="FK_Game_User" Association="MCLModel.FK_Game_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Game" EntitySet="Games" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlayerGame_Game" Association="MCLModel.FK_PlayerGame_Game">
+            <End Role="Game" EntitySet="Games" />
+            <End Role="PlayerGame" EntitySet="PlayerGames" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SeasonMaster_Game" Association="MCLModel.FK_SeasonMaster_Game">
+            <End Role="Game" EntitySet="Games" />
+            <End Role="LeagueMaster" EntitySet="LeagueMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GamingSeason_User" Association="MCLModel.FK_GamingSeason_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="League" EntitySet="Leagues" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlayerMaster_GamingSeason" Association="MCLModel.FK_PlayerMaster_GamingSeason">
+            <End Role="League" EntitySet="Leagues" />
+            <End Role="PlayerMaster" EntitySet="PlayerMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rank_League" Association="MCLModel.FK_Rank_League">
+            <End Role="League" EntitySet="Leagues" />
+            <End Role="Rank" EntitySet="Ranks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SeasonMaster_GamingSeason" Association="MCLModel.FK_SeasonMaster_GamingSeason">
+            <End Role="League" EntitySet="Leagues" />
+            <End Role="LeagueMaster" EntitySet="LeagueMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JudgesMaster_JudgesMaster" Association="MCLModel.FK_JudgesMaster_JudgesMaster">
+            <End Role="User" EntitySet="Users" />
+            <End Role="LeagueJudge" EntitySet="LeagueJudges" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JudgesMaster_SeasonMaster" Association="MCLModel.FK_JudgesMaster_SeasonMaster">
+            <End Role="LeagueMaster" EntitySet="LeagueMasters" />
+            <End Role="LeagueJudge" EntitySet="LeagueJudges" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlayerMaster_Player" Association="MCLModel.FK_PlayerMaster_Player">
+            <End Role="Player" EntitySet="Players" />
+            <End Role="PlayerMaster" EntitySet="PlayerMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlayerGame_Result" Association="MCLModel.FK_PlayerGame_Result">
+            <End Role="Result" EntitySet="Results" />
+            <End Role="PlayerGame" EntitySet="PlayerGames" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlayerGame_Tier" Association="MCLModel.FK_PlayerGame_Tier">
+            <End Role="Tier" EntitySet="Tiers" />
+            <End Role="PlayerGame" EntitySet="PlayerGames" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlayerGame_User" Association="MCLModel.FK_PlayerGame_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="PlayerGame" EntitySet="PlayerGames" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recording_PlayerMaster" Association="MCLModel.FK_Recording_PlayerMaster">
+            <End Role="PlayerMaster" EntitySet="PlayerMasters" />
+            <End Role="PlayerGame" EntitySet="PlayerGames" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlayerMaster_Tier" Association="MCLModel.FK_PlayerMaster_Tier">
+            <End Role="Tier" EntitySet="Tiers" />
+            <End Role="PlayerMaster" EntitySet="PlayerMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tier_Rank" Association="MCLModel.FK_Tier_Rank">
+            <End Role="Rank" EntitySet="Ranks" />
+            <End Role="Tier" EntitySet="Tiers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tier_TierType" Association="MCLModel.FK_Tier_TierType">
+            <End Role="TierType" EntitySet="TierTypes" />
+            <End Role="Tier" EntitySet="Tiers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_UserType" Association="MCLModel.FK_User_UserType">
+            <End Role="UserType" EntitySet="UserTypes" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Game">
+          <Key>
+            <PropertyRef Name="GameId" />
+          </Key>
+          <Property Name="GameId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedByUserId" Type="Int32" />
+          <NavigationProperty Name="User" Relationship="MCLModel.FK_Game_User" FromRole="Game" ToRole="User" />
+          <NavigationProperty Name="PlayerGames" Relationship="MCLModel.FK_PlayerGame_Game" FromRole="Game" ToRole="PlayerGame" />
+          <NavigationProperty Name="LeagueMasters" Relationship="MCLModel.FK_SeasonMaster_Game" FromRole="Game" ToRole="LeagueMaster" />
+        </EntityType>
+        <EntityType Name="League">
+          <Key>
+            <PropertyRef Name="LeagueId" />
+          </Key>
+          <Property Name="LeagueId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StartDate" Type="DateTime" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="Status" Type="Boolean" />
+          <NavigationProperty Name="User" Relationship="MCLModel.FK_GamingSeason_User" FromRole="League" ToRole="User" />
+          <NavigationProperty Name="PlayerMasters" Relationship="MCLModel.FK_PlayerMaster_GamingSeason" FromRole="League" ToRole="PlayerMaster" />
+          <NavigationProperty Name="Ranks" Relationship="MCLModel.FK_Rank_League" FromRole="League" ToRole="Rank" />
+          <NavigationProperty Name="LeagueMasters" Relationship="MCLModel.FK_SeasonMaster_GamingSeason" FromRole="League" ToRole="LeagueMaster" />
+        </EntityType>
+        <EntityType Name="LeagueJudge">
+          <Key>
+            <PropertyRef Name="LeagueJudgeId" />
+          </Key>
+          <Property Name="LeagueJudgeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="LeagueMasterId" Type="Int32" />
+          <NavigationProperty Name="User" Relationship="MCLModel.FK_JudgesMaster_JudgesMaster" FromRole="LeagueJudge" ToRole="User" />
+          <NavigationProperty Name="LeagueMaster" Relationship="MCLModel.FK_JudgesMaster_SeasonMaster" FromRole="LeagueJudge" ToRole="LeagueMaster" />
+        </EntityType>
+        <EntityType Name="LeagueMaster">
+          <Key>
+            <PropertyRef Name="LeagueMasterId" />
+          </Key>
+          <Property Name="LeagueMasterId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LeagueId" Type="Int32" />
+          <Property Name="GameId" Type="Int32" />
+          <Property Name="WinPoints" Type="Int32" />
+          <Property Name="LoosePoints" Type="Int32" />
+          <Property Name="TiePoints" Type="Int32" />
+          <Property Name="InvalidPoints" Type="Int32" />
+          <Property Name="MaximumGamePlayTime" Type="Int32" />
+          <NavigationProperty Name="Game" Relationship="MCLModel.FK_SeasonMaster_Game" FromRole="LeagueMaster" ToRole="Game" />
+          <NavigationProperty Name="League" Relationship="MCLModel.FK_SeasonMaster_GamingSeason" FromRole="LeagueMaster" ToRole="League" />
+          <NavigationProperty Name="LeagueJudges" Relationship="MCLModel.FK_JudgesMaster_SeasonMaster" FromRole="LeagueMaster" ToRole="LeagueJudge" />
+        </EntityType>
+        <EntityType Name="Player">
+          <Key>
+            <PropertyRef Name="PlayerId" />
+          </Key>
+          <Property Name="PlayerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PlayerName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="PlayerUserId" Type="Int32" />
+          <Property Name="SmartLaunchDBId" Type="Int32" />
+          <NavigationProperty Name="PlayerMasters" Relationship="MCLModel.FK_PlayerMaster_Player" FromRole="Player" ToRole="PlayerMaster" />
+        </EntityType>
+        <EntityType Name="PlayerGame">
+          <Key>
+            <PropertyRef Name="PlayerGameId" />
+          </Key>
+          <Property Name="PlayerGameId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PlayerMasterId" Type="Int32" />
+          <Property Name="RecordingFileName" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="GameStartTime" Type="DateTime" Precision="3" />
+          <Property Name="GameEndTime" Type="DateTime" Precision="3" />
+          <Property Name="GameId" Type="Int32" />
+          <Property Name="TierId" Type="Int32" />
+          <Property Name="ResultId" Type="Int32" />
+          <Property Name="GamePoints" Type="Int32" />
+          <Property Name="IsMarked" Type="Boolean" />
+          <Property Name="MarkedById" Type="Int32" />
+          <Property Name="MarkedAt" Type="DateTime" Precision="3" />
+          <Property Name="ConsoleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Game" Relationship="MCLModel.FK_PlayerGame_Game" FromRole="PlayerGame" ToRole="Game" />
+          <NavigationProperty Name="Result" Relationship="MCLModel.FK_PlayerGame_Result" FromRole="PlayerGame" ToRole="Result" />
+          <NavigationProperty Name="Tier" Relationship="MCLModel.FK_PlayerGame_Tier" FromRole="PlayerGame" ToRole="Tier" />
+          <NavigationProperty Name="User" Relationship="MCLModel.FK_PlayerGame_User" FromRole="PlayerGame" ToRole="User" />
+          <NavigationProperty Name="PlayerMaster" Relationship="MCLModel.FK_Recording_PlayerMaster" FromRole="PlayerGame" ToRole="PlayerMaster" />
+        </EntityType>
+        <EntityType Name="PlayerMaster">
+          <Key>
+            <PropertyRef Name="PlayerMasterId" />
+          </Key>
+          <Property Name="PlayerMasterId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PlayerId" Type="Int32" />
+          <Property Name="LeagueId" Type="Int32" />
+          <Property Name="TierId" Type="Int32" />
+          <Property Name="Points" Type="Int32" />
+          <Property Name="TotalPoints" Type="Int32" />
+          <Property Name="PromoEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="IsPromoBlock" Type="Boolean" />
+          <NavigationProperty Name="League" Relationship="MCLModel.FK_PlayerMaster_GamingSeason" FromRole="PlayerMaster" ToRole="League" />
+          <NavigationProperty Name="Player" Relationship="MCLModel.FK_PlayerMaster_Player" FromRole="PlayerMaster" ToRole="Player" />
+          <NavigationProperty Name="PlayerGames" Relationship="MCLModel.FK_Recording_PlayerMaster" FromRole="PlayerMaster" ToRole="PlayerGame" />
+          <NavigationProperty Name="Tier" Relationship="MCLModel.FK_PlayerMaster_Tier" FromRole="PlayerMaster" ToRole="Tier" />
+        </EntityType>
+        <EntityType Name="Rank">
+          <Key>
+            <PropertyRef Name="RankId" />
+          </Key>
+          <Property Name="RankId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TierPoints" Type="Int32" />
+          <Property Name="LeagueId" Type="Int32" />
+          <Property Name="Index" Type="Int32" />
+          <NavigationProperty Name="League" Relationship="MCLModel.FK_Rank_League" FromRole="Rank" ToRole="League" />
+          <NavigationProperty Name="Tiers" Relationship="MCLModel.FK_Tier_Rank" FromRole="Rank" ToRole="Tier" />
+        </EntityType>
+        <EntityType Name="Result">
+          <Key>
+            <PropertyRef Name="ResultId" />
+          </Key>
+          <Property Name="ResultId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PlayerGames" Relationship="MCLModel.FK_PlayerGame_Result" FromRole="Result" ToRole="PlayerGame" />
+        </EntityType>
+        <EntityType Name="Tier">
+          <Key>
+            <PropertyRef Name="TierId" />
+          </Key>
+          <Property Name="TierId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RankId" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Index" Type="Int32" />
+          <Property Name="TierTypeId" Type="Int32" />
+          <NavigationProperty Name="PlayerGames" Relationship="MCLModel.FK_PlayerGame_Tier" FromRole="Tier" ToRole="PlayerGame" />
+          <NavigationProperty Name="PlayerMasters" Relationship="MCLModel.FK_PlayerMaster_Tier" FromRole="Tier" ToRole="PlayerMaster" />
+          <NavigationProperty Name="Rank" Relationship="MCLModel.FK_Tier_Rank" FromRole="Tier" ToRole="Rank" />
+          <NavigationProperty Name="TierType" Relationship="MCLModel.FK_Tier_TierType" FromRole="Tier" ToRole="TierType" />
+        </EntityType>
+        <EntityType Name="TierType">
+          <Key>
+            <PropertyRef Name="TierTypeId" />
+          </Key>
+          <Property Name="TierTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TierType1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Tiers" Relationship="MCLModel.FK_Tier_TierType" FromRole="TierType" ToRole="Tier" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserTypeId" Type="Int32" />
+          <Property Name="LoginId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EmailId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ContactNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Games" Relationship="MCLModel.FK_Game_User" FromRole="User" ToRole="Game" />
+          <NavigationProperty Name="Leagues" Relationship="MCLModel.FK_GamingSeason_User" FromRole="User" ToRole="League" />
+          <NavigationProperty Name="LeagueJudges" Relationship="MCLModel.FK_JudgesMaster_JudgesMaster" FromRole="User" ToRole="LeagueJudge" />
+          <NavigationProperty Name="PlayerGames" Relationship="MCLModel.FK_PlayerGame_User" FromRole="User" ToRole="PlayerGame" />
+          <NavigationProperty Name="UserType" Relationship="MCLModel.FK_User_UserType" FromRole="User" ToRole="UserType" />
+        </EntityType>
+        <EntityType Name="UserType">
+          <Key>
+            <PropertyRef Name="UserTypeId" />
+          </Key>
+          <Property Name="UserTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserType1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Users" Relationship="MCLModel.FK_User_UserType" FromRole="UserType" ToRole="User" />
+        </EntityType>
+        <EntityType Name="View_AllGames">
+          <Key>
+            <PropertyRef Name="PlayerGameId" />
+            <PropertyRef Name="GameRankId" />
+            <PropertyRef Name="CurrentRankId" />
+            <PropertyRef Name="PromoEnabled" />
+          </Key>
+          <Property Name="PlayerGameId" Type="Int32" Nullable="false" />
+          <Property Name="PlayerMasterId" Type="Int32" />
+          <Property Name="RecordingFileName" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="GameStartTime" Type="DateTime" Precision="3" />
+          <Property Name="GameEndTime" Type="DateTime" Precision="3" />
+          <Property Name="GameId" Type="Int32" />
+          <Property Name="Game" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GameTierId" Type="Int32" />
+          <Property Name="GameTier" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GameTierTypeId" Type="Int32" />
+          <Property Name="GameRankId" Type="Int32" Nullable="false" />
+          <Property Name="GameTierType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GameRank" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GameResultId" Type="Int32" />
+          <Property Name="GameResult" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GamePoints" Type="Int32" />
+          <Property Name="IsMarked" Type="Boolean" />
+          <Property Name="MarkedById" Type="Int32" />
+          <Property Name="MarkedByFName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MarkedByLName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ConsoleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MarkedAt" Type="DateTime" Precision="3" />
+          <Property Name="PlayerId" Type="Int32" />
+          <Property Name="PlayerName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="LeagueId" Type="Int32" />
+          <Property Name="League" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CurrentTierId" Type="Int32" />
+          <Property Name="CurrentTier" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CurrentRankId" Type="Int32" Nullable="false" />
+          <Property Name="CurrentRank" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CurrentRankTierPoints" Type="Int32" />
+          <Property Name="CurrentTierTypeId" Type="Int32" />
+          <Property Name="CurrentTierType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CurrentRankIndex" Type="Int32" />
+          <Property Name="Points" Type="Int32" />
+          <Property Name="TotalPoints" Type="Int32" />
+          <Property Name="PromoEnabled" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="View_AllJudges">
+          <Key>
+            <PropertyRef Name="LeagueJudgeId" />
+          </Key>
+          <Property Name="LeagueJudgeId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserTypeId" Type="Int32" />
+          <Property Name="LoginId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LeagueId" Type="Int32" />
+          <Property Name="League" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GameId" Type="Int32" />
+          <Property Name="Game" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LeagueMasterId" Type="Int32" />
+        </EntityType>
+        <EntityType Name="View_AllLegueRules">
+          <Key>
+            <PropertyRef Name="LeagueId" />
+            <PropertyRef Name="LeagueMasterId" />
+          </Key>
+          <Property Name="LeagueId" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StartDate" Type="DateTime" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="LeagueMasterId" Type="Int32" Nullable="false" />
+          <Property Name="GameId" Type="Int32" />
+          <Property Name="WinPoints" Type="Int32" />
+          <Property Name="LoosePoints" Type="Int32" />
+          <Property Name="TiePoints" Type="Int32" />
+          <Property Name="InvalidPoints" Type="Int32" />
+          <Property Name="MaximumGamePlayTime" Type="Int32" />
+          <Property Name="GameTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedByUserId" Type="Int32" />
+        </EntityType>
+        <Association Name="FK_Game_User">
+          <End Type="MCLModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="MCLModel.Game" Role="Game" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Game">
+              <PropertyRef Name="CreatedByUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlayerGame_Game">
+          <End Type="MCLModel.Game" Role="Game" Multiplicity="0..1" />
+          <End Type="MCLModel.PlayerGame" Role="PlayerGame" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Game">
+              <PropertyRef Name="GameId" />
+            </Principal>
+            <Dependent Role="PlayerGame">
+              <PropertyRef Name="GameId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SeasonMaster_Game">
+          <End Type="MCLModel.Game" Role="Game" Multiplicity="0..1" />
+          <End Type="MCLModel.LeagueMaster" Role="LeagueMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Game">
+              <PropertyRef Name="GameId" />
+            </Principal>
+            <Dependent Role="LeagueMaster">
+              <PropertyRef Name="GameId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GamingSeason_User">
+          <End Type="MCLModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="MCLModel.League" Role="League" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="League">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlayerMaster_GamingSeason">
+          <End Type="MCLModel.League" Role="League" Multiplicity="0..1" />
+          <End Type="MCLModel.PlayerMaster" Role="PlayerMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="League">
+              <PropertyRef Name="LeagueId" />
+            </Principal>
+            <Dependent Role="PlayerMaster">
+              <PropertyRef Name="LeagueId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rank_League">
+          <End Type="MCLModel.League" Role="League" Multiplicity="0..1" />
+          <End Type="MCLModel.Rank" Role="Rank" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="League">
+              <PropertyRef Name="LeagueId" />
+            </Principal>
+            <Dependent Role="Rank">
+              <PropertyRef Name="LeagueId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SeasonMaster_GamingSeason">
+          <End Type="MCLModel.League" Role="League" Multiplicity="0..1" />
+          <End Type="MCLModel.LeagueMaster" Role="LeagueMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="League">
+              <PropertyRef Name="LeagueId" />
+            </Principal>
+            <Dependent Role="LeagueMaster">
+              <PropertyRef Name="LeagueId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JudgesMaster_JudgesMaster">
+          <End Type="MCLModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="MCLModel.LeagueJudge" Role="LeagueJudge" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="LeagueJudge">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JudgesMaster_SeasonMaster">
+          <End Type="MCLModel.LeagueMaster" Role="LeagueMaster" Multiplicity="0..1" />
+          <End Type="MCLModel.LeagueJudge" Role="LeagueJudge" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LeagueMaster">
+              <PropertyRef Name="LeagueMasterId" />
+            </Principal>
+            <Dependent Role="LeagueJudge">
+              <PropertyRef Name="LeagueMasterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlayerMaster_Player">
+          <End Type="MCLModel.Player" Role="Player" Multiplicity="0..1" />
+          <End Type="MCLModel.PlayerMaster" Role="PlayerMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Player">
+              <PropertyRef Name="PlayerId" />
+            </Principal>
+            <Dependent Role="PlayerMaster">
+              <PropertyRef Name="PlayerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlayerGame_Result">
+          <End Type="MCLModel.Result" Role="Result" Multiplicity="0..1" />
+          <End Type="MCLModel.PlayerGame" Role="PlayerGame" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Result">
+              <PropertyRef Name="ResultId" />
+            </Principal>
+            <Dependent Role="PlayerGame">
+              <PropertyRef Name="ResultId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlayerGame_Tier">
+          <End Type="MCLModel.Tier" Role="Tier" Multiplicity="0..1" />
+          <End Type="MCLModel.PlayerGame" Role="PlayerGame" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tier">
+              <PropertyRef Name="TierId" />
+            </Principal>
+            <Dependent Role="PlayerGame">
+              <PropertyRef Name="TierId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlayerGame_User">
+          <End Type="MCLModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="MCLModel.PlayerGame" Role="PlayerGame" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="PlayerGame">
+              <PropertyRef Name="MarkedById" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Recording_PlayerMaster">
+          <End Type="MCLModel.PlayerMaster" Role="PlayerMaster" Multiplicity="0..1" />
+          <End Type="MCLModel.PlayerGame" Role="PlayerGame" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PlayerMaster">
+              <PropertyRef Name="PlayerMasterId" />
+            </Principal>
+            <Dependent Role="PlayerGame">
+              <PropertyRef Name="PlayerMasterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlayerMaster_Tier">
+          <End Type="MCLModel.Tier" Role="Tier" Multiplicity="0..1" />
+          <End Type="MCLModel.PlayerMaster" Role="PlayerMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tier">
+              <PropertyRef Name="TierId" />
+            </Principal>
+            <Dependent Role="PlayerMaster">
+              <PropertyRef Name="TierId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tier_Rank">
+          <End Type="MCLModel.Rank" Role="Rank" Multiplicity="1" />
+          <End Type="MCLModel.Tier" Role="Tier" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rank">
+              <PropertyRef Name="RankId" />
+            </Principal>
+            <Dependent Role="Tier">
+              <PropertyRef Name="RankId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tier_TierType">
+          <End Type="MCLModel.TierType" Role="TierType" Multiplicity="0..1" />
+          <End Type="MCLModel.Tier" Role="Tier" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TierType">
+              <PropertyRef Name="TierTypeId" />
+            </Principal>
+            <Dependent Role="Tier">
+              <PropertyRef Name="TierTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_UserType">
+          <End Type="MCLModel.UserType" Role="UserType" Multiplicity="0..1" />
+          <End Type="MCLModel.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserType">
+              <PropertyRef Name="UserTypeId" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="UserTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MCLModelStoreContainer" CdmEntityContainer="MCLEntities">
+          <EntitySetMapping Name="Games">
+            <EntityTypeMapping TypeName="MCLModel.Game">
+              <MappingFragment StoreEntitySet="Game">
+                <ScalarProperty Name="CreatedByUserId" ColumnName="CreatedByUserId" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="GameId" ColumnName="GameId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Leagues">
+            <EntityTypeMapping TypeName="MCLModel.League">
+              <MappingFragment StoreEntitySet="League">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="LeagueId" ColumnName="LeagueId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LeagueJudges">
+            <EntityTypeMapping TypeName="MCLModel.LeagueJudge">
+              <MappingFragment StoreEntitySet="LeagueJudge">
+                <ScalarProperty Name="LeagueMasterId" ColumnName="LeagueMasterId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="LeagueJudgeId" ColumnName="LeagueJudgeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LeagueMasters">
+            <EntityTypeMapping TypeName="MCLModel.LeagueMaster">
+              <MappingFragment StoreEntitySet="LeagueMaster">
+                <ScalarProperty Name="MaximumGamePlayTime" ColumnName="MaximumGamePlayTime" />
+                <ScalarProperty Name="InvalidPoints" ColumnName="InvalidPoints" />
+                <ScalarProperty Name="TiePoints" ColumnName="TiePoints" />
+                <ScalarProperty Name="LoosePoints" ColumnName="LoosePoints" />
+                <ScalarProperty Name="WinPoints" ColumnName="WinPoints" />
+                <ScalarProperty Name="GameId" ColumnName="GameId" />
+                <ScalarProperty Name="LeagueId" ColumnName="LeagueId" />
+                <ScalarProperty Name="LeagueMasterId" ColumnName="LeagueMasterId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Players">
+            <EntityTypeMapping TypeName="MCLModel.Player">
+              <MappingFragment StoreEntitySet="Player">
+                <ScalarProperty Name="SmartLaunchDBId" ColumnName="SmartLaunchDBId" />
+                <ScalarProperty Name="PlayerUserId" ColumnName="PlayerUserId" />
+                <ScalarProperty Name="PlayerName" ColumnName="PlayerName" />
+                <ScalarProperty Name="PlayerId" ColumnName="PlayerId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PlayerGames">
+            <EntityTypeMapping TypeName="MCLModel.PlayerGame">
+              <MappingFragment StoreEntitySet="PlayerGame">
+                <ScalarProperty Name="ConsoleName" ColumnName="ConsoleName" />
+                <ScalarProperty Name="MarkedAt" ColumnName="MarkedAt" />
+                <ScalarProperty Name="MarkedById" ColumnName="MarkedById" />
+                <ScalarProperty Name="IsMarked" ColumnName="IsMarked" />
+                <ScalarProperty Name="GamePoints" ColumnName="GamePoints" />
+                <ScalarProperty Name="ResultId" ColumnName="ResultId" />
+                <ScalarProperty Name="TierId" ColumnName="TierId" />
+                <ScalarProperty Name="GameId" ColumnName="GameId" />
+                <ScalarProperty Name="GameEndTime" ColumnName="GameEndTime" />
+                <ScalarProperty Name="GameStartTime" ColumnName="GameStartTime" />
+                <ScalarProperty Name="RecordingFileName" ColumnName="RecordingFileName" />
+                <ScalarProperty Name="PlayerMasterId" ColumnName="PlayerMasterId" />
+                <ScalarProperty Name="PlayerGameId" ColumnName="PlayerGameId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PlayerMasters">
+            <EntityTypeMapping TypeName="MCLModel.PlayerMaster">
+              <MappingFragment StoreEntitySet="PlayerMaster">
+                <ScalarProperty Name="IsPromoBlock" ColumnName="IsPromoBlock" />
+                <ScalarProperty Name="PromoEnabled" ColumnName="PromoEnabled" />
+                <ScalarProperty Name="TotalPoints" ColumnName="TotalPoints" />
+                <ScalarProperty Name="Points" ColumnName="Points" />
+                <ScalarProperty Name="TierId" ColumnName="TierId" />
+                <ScalarProperty Name="LeagueId" ColumnName="LeagueId" />
+                <ScalarProperty Name="PlayerId" ColumnName="PlayerId" />
+                <ScalarProperty Name="PlayerMasterId" ColumnName="PlayerMasterId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ranks">
+            <EntityTypeMapping TypeName="MCLModel.Rank">
+              <MappingFragment StoreEntitySet="Rank">
+                <ScalarProperty Name="Index" ColumnName="Index" />
+                <ScalarProperty Name="LeagueId" ColumnName="LeagueId" />
+                <ScalarProperty Name="TierPoints" ColumnName="TierPoints" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="RankId" ColumnName="RankId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Results">
+            <EntityTypeMapping TypeName="MCLModel.Result">
+              <MappingFragment StoreEntitySet="Result">
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="ResultId" ColumnName="ResultId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tiers">
+            <EntityTypeMapping TypeName="MCLModel.Tier">
+              <MappingFragment StoreEntitySet="Tier">
+                <ScalarProperty Name="TierTypeId" ColumnName="TierTypeId" />
+                <ScalarProperty Name="Index" ColumnName="Index" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="RankId" ColumnName="RankId" />
+                <ScalarProperty Name="TierId" ColumnName="TierId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TierTypes">
+            <EntityTypeMapping TypeName="MCLModel.TierType">
+              <MappingFragment StoreEntitySet="TierType">
+                <ScalarProperty Name="TierType1" ColumnName="TierType" />
+                <ScalarProperty Name="TierTypeId" ColumnName="TierTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="MCLModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="ContactNumber" ColumnName="ContactNumber" />
+                <ScalarProperty Name="EmailId" ColumnName="EmailId" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="LoginId" ColumnName="LoginId" />
+                <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserTypes">
+            <EntityTypeMapping TypeName="MCLModel.UserType">
+              <MappingFragment StoreEntitySet="UserType">
+                <ScalarProperty Name="UserType1" ColumnName="UserType" />
+                <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="View_AllGames">
+            <EntityTypeMapping TypeName="MCLModel.View_AllGames">
+              <MappingFragment StoreEntitySet="View_AllGames">
+                <ScalarProperty Name="PromoEnabled" ColumnName="PromoEnabled" />
+                <ScalarProperty Name="TotalPoints" ColumnName="TotalPoints" />
+                <ScalarProperty Name="Points" ColumnName="Points" />
+                <ScalarProperty Name="CurrentRankIndex" ColumnName="CurrentRankIndex" />
+                <ScalarProperty Name="CurrentTierType" ColumnName="CurrentTierType" />
+                <ScalarProperty Name="CurrentTierTypeId" ColumnName="CurrentTierTypeId" />
+                <ScalarProperty Name="CurrentRankTierPoints" ColumnName="CurrentRankTierPoints" />
+                <ScalarProperty Name="CurrentRank" ColumnName="CurrentRank" />
+                <ScalarProperty Name="CurrentRankId" ColumnName="CurrentRankId" />
+                <ScalarProperty Name="CurrentTier" ColumnName="CurrentTier" />
+                <ScalarProperty Name="CurrentTierId" ColumnName="CurrentTierId" />
+                <ScalarProperty Name="League" ColumnName="League" />
+                <ScalarProperty Name="LeagueId" ColumnName="LeagueId" />
+                <ScalarProperty Name="PlayerName" ColumnName="PlayerName" />
+                <ScalarProperty Name="PlayerId" ColumnName="PlayerId" />
+                <ScalarProperty Name="MarkedAt" ColumnName="MarkedAt" />
+                <ScalarProperty Name="ConsoleName" ColumnName="ConsoleName" />
+                <ScalarProperty Name="MarkedByLName" ColumnName="MarkedByLName" />
+                <ScalarProperty Name="MarkedByFName" ColumnName="MarkedByFName" />
+                <ScalarProperty Name="MarkedById" ColumnName="MarkedById" />
+                <ScalarProperty Name="IsMarked" ColumnName="IsMarked" />
+                <ScalarProperty Name="GamePoints" ColumnName="GamePoints" />
+                <ScalarProperty Name="GameResult" ColumnName="GameResult" />
+                <ScalarProperty Name="GameResultId" ColumnName="GameResultId" />
+                <ScalarProperty Name="GameRank" ColumnName="GameRank" />
+                <ScalarProperty Name="GameTierType" ColumnName="GameTierType" />
+                <ScalarProperty Name="GameRankId" ColumnName="GameRankId" />
+                <ScalarProperty Name="GameTierTypeId" ColumnName="GameTierTypeId" />
+                <ScalarProperty Name="GameTier" ColumnName="GameTier" />
+                <ScalarProperty Name="GameTierId" ColumnName="GameTierId" />
+                <ScalarProperty Name="Game" ColumnName="Game" />
+                <ScalarProperty Name="GameId" ColumnName="GameId" />
+                <ScalarProperty Name="GameEndTime" ColumnName="GameEndTime" />
+                <ScalarProperty Name="GameStartTime" ColumnName="GameStartTime" />
+                <ScalarProperty Name="RecordingFileName" ColumnName="RecordingFileName" />
+                <ScalarProperty Name="PlayerMasterId" ColumnName="PlayerMasterId" />
+                <ScalarProperty Name="PlayerGameId" ColumnName="PlayerGameId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="View_AllJudges">
+            <EntityTypeMapping TypeName="MCLModel.View_AllJudges">
+              <MappingFragment StoreEntitySet="View_AllJudges">
+                <ScalarProperty Name="LeagueMasterId" ColumnName="LeagueMasterId" />
+                <ScalarProperty Name="Game" ColumnName="Game" />
+                <ScalarProperty Name="GameId" ColumnName="GameId" />
+                <ScalarProperty Name="League" ColumnName="League" />
+                <ScalarProperty Name="LeagueId" ColumnName="LeagueId" />
+                <ScalarProperty Name="LoginId" ColumnName="LoginId" />
+                <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="LeagueJudgeId" ColumnName="LeagueJudgeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="View_AllLegueRules">
+            <EntityTypeMapping TypeName="MCLModel.View_AllLegueRules">
+              <MappingFragment StoreEntitySet="View_AllLegueRules">
+                <ScalarProperty Name="CreatedByUserId" ColumnName="CreatedByUserId" />
+                <ScalarProperty Name="GameTitle" ColumnName="GameTitle" />
+                <ScalarProperty Name="MaximumGamePlayTime" ColumnName="MaximumGamePlayTime" />
+                <ScalarProperty Name="InvalidPoints" ColumnName="InvalidPoints" />
+                <ScalarProperty Name="TiePoints" ColumnName="TiePoints" />
+                <ScalarProperty Name="LoosePoints" ColumnName="LoosePoints" />
+                <ScalarProperty Name="WinPoints" ColumnName="WinPoints" />
+                <ScalarProperty Name="GameId" ColumnName="GameId" />
+                <ScalarProperty Name="LeagueMasterId" ColumnName="LeagueMasterId" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="LeagueId" ColumnName="LeagueId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="UseLegacyProvider" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="MCL" ZoomLevel="73">
+        <EntityTypeShape EntityType="MCLModel.Game" Width="1.5" PointX="5.25" PointY="6.625" />
+        <EntityTypeShape EntityType="MCLModel.League" Width="1.5" PointX="5.25" PointY="9.625" />
+        <EntityTypeShape EntityType="MCLModel.LeagueJudge" Width="1.5" PointX="12.75" PointY="7.25" />
+        <EntityTypeShape EntityType="MCLModel.LeagueMaster" Width="1.5" PointX="7.5" PointY="5" />
+        <EntityTypeShape EntityType="MCLModel.Player" Width="1.5" PointX="10.75" PointY="16.5" />
+        <EntityTypeShape EntityType="MCLModel.PlayerGame" Width="1.5" PointX="10.5" PointY="6.75" />
+        <EntityTypeShape EntityType="MCLModel.PlayerMaster" Width="1.5" PointX="13" PointY="10.875" />
+        <EntityTypeShape EntityType="MCLModel.Rank" Width="1.5" PointX="7.5" PointY="9.875" />
+        <EntityTypeShape EntityType="MCLModel.Result" Width="1.5" PointX="8.25" PointY="2.625" />
+        <EntityTypeShape EntityType="MCLModel.Tier" Width="1.5" PointX="9.75" PointY="12.625" />
+        <EntityTypeShape EntityType="MCLModel.TierType" Width="1.5" PointX="7.5" PointY="13.25" />
+        <EntityTypeShape EntityType="MCLModel.User" Width="1.5" PointX="3" PointY="7.875" />
+        <EntityTypeShape EntityType="MCLModel.UserType" Width="1.5" PointX="0.75" PointY="8.75" />
+        <EntityTypeShape EntityType="MCLModel.View_AllGames" Width="1.5" PointX="0.75" PointY="12.75" />
+        <EntityTypeShape EntityType="MCLModel.View_AllJudges" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="MCLModel.View_AllLegueRules" Width="1.5" PointX="4.75" PointY="0.75" />
+        <AssociationConnector Association="MCLModel.FK_Game_User" />
+        <AssociationConnector Association="MCLModel.FK_PlayerGame_Game" />
+        <AssociationConnector Association="MCLModel.FK_SeasonMaster_Game" />
+        <AssociationConnector Association="MCLModel.FK_GamingSeason_User" />
+        <AssociationConnector Association="MCLModel.FK_PlayerMaster_GamingSeason" />
+        <AssociationConnector Association="MCLModel.FK_Rank_League" />
+        <AssociationConnector Association="MCLModel.FK_SeasonMaster_GamingSeason" />
+        <AssociationConnector Association="MCLModel.FK_JudgesMaster_JudgesMaster" />
+        <AssociationConnector Association="MCLModel.FK_JudgesMaster_SeasonMaster" />
+        <AssociationConnector Association="MCLModel.FK_PlayerMaster_Player" />
+        <AssociationConnector Association="MCLModel.FK_PlayerGame_Result" />
+        <AssociationConnector Association="MCLModel.FK_PlayerGame_Tier" />
+        <AssociationConnector Association="MCLModel.FK_PlayerGame_User" />
+        <AssociationConnector Association="MCLModel.FK_Recording_PlayerMaster" />
+        <AssociationConnector Association="MCLModel.FK_PlayerMaster_Tier" />
+        <AssociationConnector Association="MCLModel.FK_Tier_Rank" />
+        <AssociationConnector Association="MCLModel.FK_Tier_TierType" />
+        <AssociationConnector Association="MCLModel.FK_User_UserType" />
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>
